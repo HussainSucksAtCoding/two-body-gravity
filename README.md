@@ -4,7 +4,7 @@ A basic simulation of two celestial bodies gravitational forces.
 this uses macroquad for graphics.
 
 ## usage
-```cargo build --release``
+```cargo build --release```
 
 or you can run it immediately
 
