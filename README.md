@@ -1,5 +1,5 @@
 # two-body-gravity
-A basic simulation of two celestial bodies gravitational forces.
+A basic simulation of two celestial bodies' gravitational forces.
 
 this uses macroquad for graphics.
 
