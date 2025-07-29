@@ -1,5 +1,5 @@
 [package]
-name = "rs_solarsystem2"
+name = "two_body_gravity"
 version = "0.1.0"
 edition = "2024"
 
