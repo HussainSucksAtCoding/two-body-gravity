@@ -10,6 +10,6 @@ or you can run it immediately
 
 ```cargo run --release```
 
-## limitation
+## limitations
 - only two celestial bodies.
 - no control through the window in anyway. you have to tinker with the code.
