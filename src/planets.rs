@@ -12,7 +12,7 @@ pub struct Planet {
 //     planets: Vec<Planet>,
 // }
 
-pub fn calculate_gravity(first: &Planet, other: &Planet) -> Vec2 {
+pub fn calculate_force(first: &Planet, other: &Planet) -> Vec2 {
     let direction = other.pos - first.pos;
     let distance_squared = direction.length_squared().max(0.01); // Avoid division by 0
     let force_magnitude = (other.mass * first.mass) / distance_squared;
@@ -20,17 +20,31 @@ pub fn calculate_gravity(first: &Planet, other: &Planet) -> Vec2 {
     force
 }
 
+pub fn push_planet(planet: Planet, solarsystem: &mut Vec<Planet>) {
+    solarsystem.push(planet);
+}
+
 impl Planet {
-    pub fn build_planet(mass: f32, pos: Vec2, velocity: Vec2, r: f32) -> Planet {
-        let pl = Planet {
+    pub fn build_planet(mass: f32, pos: Vec2, velocity: Vec2, r: f32) -> Self {
+        let pl = Self {
             mass,
             pos,
             velocity,
             r,
         };
+
+        draw_circle(pl.pos.x, pl.pos.y, 20.0, WHITE);
         return pl;
     }
-    pub fn push_planet(self, solarsystem: &mut Vec<Planet>) {
-        solarsystem.push(self);
+    pub fn draw_planet(&mut self, other: &Planet) {
+        let direction = other.pos - self.pos;
+        let distance_squared = direction.length_squared().max(0.01); // Avoid division by 0
+        let force_magnitude = (other.mass * self.mass) / distance_squared;
+        let force = direction.normalize() * force_magnitude;
+        let acceleration = force / self.mass;
+
+        self.velocity += acceleration * get_frame_time();
+        self.pos += self.velocity;
+        draw_circle(self.pos.x, self.pos.y, self.r, WHITE);
     }
 }
