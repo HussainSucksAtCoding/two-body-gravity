@@ -8,18 +8,6 @@ pub struct Planet {
     pub r: f32,
 }
 
-// pub struct SolarSystem {
-//     planets: Vec<Planet>,
-// }
-
-pub fn calculate_force(first: &Planet, other: &Planet) -> Vec2 {
-    let direction = other.pos - first.pos;
-    let distance_squared = direction.length_squared().max(0.01); // Avoid division by 0
-    let force_magnitude = (other.mass * first.mass) / distance_squared;
-    let force = direction.normalize() * force_magnitude;
-    force
-}
-
 pub fn push_planet(planet: Planet, solarsystem: &mut Vec<Planet>) {
     solarsystem.push(planet);
 }
@@ -32,9 +20,10 @@ impl Planet {
             velocity,
             r,
         };
-
-        draw_circle(pl.pos.x, pl.pos.y, 20.0, WHITE);
         return pl;
+    }
+    pub fn draw(&self) {
+        draw_circle(self.pos.x, self.pos.y, self.r, YELLOW);
     }
     pub fn draw_planet(&mut self, other: &Planet) {
         let direction = other.pos - self.pos;
